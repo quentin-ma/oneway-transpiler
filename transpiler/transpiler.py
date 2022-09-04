@@ -91,7 +91,7 @@ class Transpiler:
             if pattern.name == 'cx':
                 if indexes[i][0] > indexes[i][1]:
 
-                    if outputs[current.index[0]] == None and outputs[current.index[1]] == None:
+                    if outputs[current.index[0]] is None and outputs[current.index[1]] is None:
                         begin = last + 1
                         end = begin + pattern.num_qubits - 1
 
@@ -102,7 +102,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits)
 
-                    if outputs[current.index[0]] == None and outputs[current.index[1]] != None:
+                    if outputs[current.index[0]] is None and outputs[current.index[1]] is not None:
                         control = last + pattern.num_qubits - 1
                         target = outputs[current.index[1]]
 
@@ -113,7 +113,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits - 1)
 
-                    if outputs[current.index[0]] != None and outputs[current.index[1]] == None:
+                    if outputs[current.index[0]] is not None and outputs[current.index[1]] is None:
                         control = outputs[current.index[0]]
                         target = last
 
@@ -124,7 +124,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits - 1)
 
-                    if outputs[current.index[0]] != None and outputs[current.index[1]] != None:
+                    if outputs[current.index[0]] is not None and outputs[current.index[1]] is not None:
                         control = outputs[current.index[0]]
                         target = outputs[current.index[1]]
 
@@ -136,7 +136,7 @@ class Transpiler:
                         d[i][1].append(last + 2)
 
                 if indexes[i][0] < indexes[i][1]:
-                    if outputs[current.index[0]] == None and outputs[current.index[1]] == None:
+                    if outputs[current.index[0]] is None and outputs[current.index[1]] is None:
                         control = last + 1
                         target = control + pattern.num_qubits - 1
 
@@ -147,7 +147,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits)
 
-                    if outputs[current.index[0]] == None and outputs[current.index[1]] != None:
+                    if outputs[current.index[0]] is None and outputs[current.index[1]] is not None:
                         control = last + 1
                         target = outputs[current.index[1]]
 
@@ -158,7 +158,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits - 1)
 
-                    if outputs[current.index[0]] != None and outputs[current.index[1]] == None:
+                    if outputs[current.index[0]] is not None and outputs[current.index[1]] == None:
                         control = outputs[current.index[0]]
                         target = last + pattern.num_qubits - 1
 
@@ -169,7 +169,7 @@ class Transpiler:
 
                         d[i][1].append(last + pattern.num_qubits - 1)
 
-                    if outputs[current.index[0]] != None and outputs[current.index[1]] != None:
+                    if outputs[current.index[0]] is not None and outputs[current.index[1]] is not None:
                         control = outputs[current.index[0]]
                         target = outputs[current.index[1]]
 
@@ -187,11 +187,11 @@ class Transpiler:
                 outputs[current.index[1]] = d[i][0][1][1]
 
             if pattern.name != "cx":
-                if outputs[current.index[0]] == None:
+                if outputs[current.index[0]] is None:
                     slots = [x for x in range(last + 1, last + pattern.num_qubits + 1)]
                     list(map(lambda x: d[i][0][0].append(x), slots))
 
-                if outputs[current.index[0]] != None:
+                if outputs[current.index[0]] is not None:
                     d[i][0][0].append(outputs[current.index[0]])
                     slots = [x for x in range(last + 1, last + pattern.num_qubits)]
                     list(map(lambda x: d[i][0][0].append(x), slots))
