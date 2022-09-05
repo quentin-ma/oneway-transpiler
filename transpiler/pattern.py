@@ -3,12 +3,12 @@ from qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister
 
 class Pattern:
     def __init__(self):
-        self.num_qubits_id = 3
-        self._num_qubits_h = 2
-        self._num_qubits_s = 5
-        self._num_qubits_rz = 3
-        self._num_qubits_u3 = 5
-        self._num_qubits_cx = 4
+        pass
+
+    def reset(self) -> QuantumCircuit:
+        qc = QuantumCircuit(1)
+        qc.reset(0)
+        return qc
 
     def id(self) -> QuantumCircuit:
         qr = QuantumRegister(3)
@@ -141,23 +141,3 @@ class Pattern:
         qc.z(qr[1]).c_if(cr[0], 1)
         qc.z(qr[0]).c_if(cr[1], 1)
         return qc
-
-    @property
-    def num_qubits_h(self) -> int:
-        return self._num_qubits_h
-
-    @property
-    def num_qubits_s(self) -> int:
-        return self._num_qubits_s
-
-    @property
-    def num_qubits_rz(self) -> int:
-        return self._num_qubits_rz
-
-    @property
-    def num_qubits_u3(self) -> int:
-        return self._num_qubits_u3
-
-    @property
-    def num_qubits_cx(self) -> int:
-        return self._num_qubits_cx

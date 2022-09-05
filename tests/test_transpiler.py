@@ -8,7 +8,8 @@ basis_gates = ['h', 's', 'rz', 'u3', 'cx', 'id']
 
 
 def _main():
-    circ = random_circuit(2, 2)
+    circ = random_circuit(5, 5)
+    print(circ)
 
     circ = transpile(circ, basis_gates=basis_gates, optimization_level=0)
 
